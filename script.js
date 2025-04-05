@@ -1,7 +1,7 @@
 let playerX = 280;
 let playerY = 180;
 const devMode = true;
-
+const player = document.getElementById("player");
 
 document.addEventListener("keydown", function(event) {
     //TEMP for debugging
@@ -24,3 +24,7 @@ document.addEventListener("keydown", function(event) {
 
     
 })
+function drawPlayer() {
+    player.style.top = playerY + "px";
+    player.style.left = playerX + "px";
+}
