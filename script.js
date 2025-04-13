@@ -7,6 +7,37 @@ const devMode = true;
 const player = document.getElementById("player");
 const gamecontainer = document.querySelector(".game-container");
 const containerRect = gamecontainer.getBoundingClientRect();
+const gem = document.getElementById("gem");
+const score = document.getElementById("score");
+
+let scoreValue = 0;
+
+function checkCollision() {
+    // 1. Get player and gem bounding boxes
+    const playerRect = player.getBoundingClientRect();
+    const gemRect = gem.getBoundingClientRect();
+
+    // 2. Check if the rectangles overlap (X and Y)
+    if (playerRect.left < gemRect.right &&
+        playerRect.right > gemRect.left &&
+        playerRect.top < gemRect.bottom &&
+        playerRect.bottom > gemRect.top) {
+        
+        // 3. Collision happened — handle it
+        // Move gem to random position within container
+        const maxX = containerRect.width - gem.offsetWidth;
+        const maxY = containerRect.height - gem.offsetHeight;
+        
+        gem.style.left = Math.floor(Math.random() * maxX) + "px";
+        gem.style.top = Math.floor(Math.random() * maxY) + "px";
+        
+        // Increment score
+        scoreValue += 10;
+        
+        // Update score display
+        score.textContent = scoreValue;
+    }
+}
 
 // 3. Event Listeners
 document.addEventListener("keydown", function(event) {
